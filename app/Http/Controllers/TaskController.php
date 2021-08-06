@@ -46,7 +46,7 @@ class TaskController extends Controller
             ])
             ->save();
 
-        return view('dashboard');
+        return redirect('dashboard');
     }
 
     /**
