@@ -6,9 +6,16 @@
     </x-slot>
 
 
+    @if(isset($tasks))
     @foreach($tasks as $task)
         <x-task-card>
-            {{$task->task_name}}
+            <x-slot name="task_name">{{$task->task_name}}</x-slot>
+            <x-slot name="created_at">{{$task->created_at}}</x-slot>
         </x-task-card>
     @endforeach
+    @else
+        <x-task-card>
+            {{__('dashboard.tasks_are_missing')}}
+        </x-task-card>
+    @endif
 </x-app-layout>
