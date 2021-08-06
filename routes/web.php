@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +21,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $task = new Task();
+    $tasks = $task->where(['user_id' => Auth::user()->id])->get();
+
+    return view('dashboard', ['tasks' => $tasks]);
+
 })->middleware(['auth'])->name('dashboard');
+
+Route::resource('task_manager', TaskController::class)->middleware(['auth']);
 
 require __DIR__.'/auth.php';
