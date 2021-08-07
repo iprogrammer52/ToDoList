@@ -43,6 +43,7 @@ class TaskController extends Controller
             ->create([
                 'user_id' => Auth::user()->id,
                 'task_name' => $request['task_name'],
+                'task_body' => $request['task_body'],
             ])
             ->save();
 

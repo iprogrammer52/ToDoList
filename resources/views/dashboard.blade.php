@@ -10,6 +10,7 @@
     @foreach($tasks as $task)
         <x-task-card>
             <x-slot name="task_name">{{$task->task_name}}</x-slot>
+            <x-slot name="task_body">{{$task->task_body}}</x-slot>
             <x-slot name="created_at">{{$task->created_at}}</x-slot>
         </x-task-card>
     @endforeach

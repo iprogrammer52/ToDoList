@@ -5,6 +5,7 @@
                 <h1 class="text-2xl text-gray-800 font-semibold mb-3">
                     {{$task_name}}
                 </h1>
+                <p class="text-gray-600 leading-6 tracking-normal">{{$task_body}}</p>
                 <p class="text-gray-600 leading-6 tracking-normal">{{$created_at}}</p>
             </div>
         </div>

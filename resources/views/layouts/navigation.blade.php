@@ -35,15 +35,6 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
                         <form method="GET" action="{{ route('task_manager.index') }}">
                             @csrf
 
@@ -51,6 +42,15 @@
                                              onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('dashboard.add_task') }}
+                            </x-dropdown-link>
+                        </form>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
