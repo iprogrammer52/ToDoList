@@ -58,7 +58,10 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = new Task();
+        $task_data = $task->where('id', '=', $id)->first();
+
+        return view('add_task', ['task_data' => $task_data]);
     }
 
     /**
@@ -81,7 +84,14 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // TODO: Ля, херня какая-то по моему. Разобраться, устранить
+        $tasks = new Task();
+        $status = $tasks->where('id', $request->task_id)->update([
+            'task_name' => $request->task_name,
+            'task_body' => $request->task_body,
+        ]);
+
+        return redirect('dashboard');
     }
 
     /**

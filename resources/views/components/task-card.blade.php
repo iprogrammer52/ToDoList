@@ -12,7 +12,7 @@
                     @method('DELETE')
                     @csrf
                         <div class="flex items-center justify-end mt-4">
-                            <a href="#" class="border-b-2 border-transparent hover:text-gray-800 hover:border-gray-800 mx-1.5 sm:mx-6">Редактировать</a>
+                            <a href="{{asset('task_manager/'. $task_id)}}" class="border-b-2 border-transparent hover:text-gray-800 hover:border-gray-800 mx-1.5 sm:mx-6">Редактировать</a>
                             <x-button class="ml-3">
                                 {{ __('add_task.delete') }}
                             </x-button>
