@@ -17,8 +17,6 @@
     @else
         <x-task-card>
             <x-slot name="task_name">{{__('add_task.there_are_no_tasks')}}</x-slot>
-            <x-slot name="task_body"></x-slot>
-            <x-slot name="created_at"></x-slot>
         </x-task-card>
     @endif
 </x-app-layout>

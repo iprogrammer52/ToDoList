@@ -36,18 +36,27 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO: Защиту сюда, срочно.
+        $validated = $request->validate([
+            'task_name' => 'required|max:255',
+            'task_body' => 'required'
+        ]);
+
         $task = new Task();
 
         $status = $task
             ->create([
                 'user_id' => Auth::user()->id,
-                'task_name' => $request['task_name'],
-                'task_body' => $request['task_body'],
+                'task_name' => $validated['task_name'],
+                'task_body' => $validated['task_body'],
             ])
             ->save();
 
-        return redirect('dashboard');
+        if ($status)
+        {
+            return redirect('dashboard');
+        } else {
+            return abort('403');
+        }
     }
 
     /**
@@ -84,12 +93,18 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // TODO: Ля, херня какая-то по моему. Разобраться, устранить
-        $tasks = new Task();
-        $status = $tasks->where('id', $request->task_id)->update([
-            'task_name' => $request->task_name,
-            'task_body' => $request->task_body,
+        $validated = $request->validate([
+            'task_name' => 'required|max:255',
+            'task_body' => 'required'
         ]);
+
+        $tasks = new Task();
+
+        $status = $tasks->where('id', $request->task_id)->update([
+            'task_name' => $validated->task_name,
+            'task_body' => $validated->task_body,
+        ]);
+        //TODO: Добавить сюда обработчик статуса.
 
         return redirect('dashboard');
     }
@@ -104,6 +119,8 @@ class TaskController extends Controller
     {
         $tasks = new Task();
         $status = $tasks->where('id', '=', $id)->delete();
+        // TODO: Сюда обработчик статуса
+
         return redirect('dashboard');
     }
 }
