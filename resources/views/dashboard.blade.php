@@ -5,18 +5,20 @@
         </h2>
     </x-slot>
 
-
-    @if(isset($tasks))
+    @if(!$tasks->isEmpty())
     @foreach($tasks as $task)
         <x-task-card>
             <x-slot name="task_name">{{$task->task_name}}</x-slot>
             <x-slot name="task_body">{{$task->task_body}}</x-slot>
             <x-slot name="created_at">{{$task->created_at}}</x-slot>
+            <x-slot name="task_id">{{$task->id}}</x-slot>
         </x-task-card>
     @endforeach
     @else
         <x-task-card>
-            {{__('dashboard.tasks_are_missing')}}
+            <x-slot name="task_name">{{__('add_task.there_are_no_tasks')}}</x-slot>
+            <x-slot name="task_body"></x-slot>
+            <x-slot name="created_at"></x-slot>
         </x-task-card>
     @endif
 </x-app-layout>

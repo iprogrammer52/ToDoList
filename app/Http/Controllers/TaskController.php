@@ -92,6 +92,8 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tasks = new Task();
+        $status = $tasks->where('id', '=', $id)->delete();
+        return redirect('dashboard');
     }
 }
