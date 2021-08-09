@@ -43,7 +43,7 @@ class TaskController extends Controller
 
         $task = new Task();
 
-        $status = $task
+        $task
             ->create([
                 'user_id' => Auth::user()->id,
                 'task_name' => $validated['task_name'],
@@ -51,12 +51,7 @@ class TaskController extends Controller
             ])
             ->save();
 
-        if ($status)
-        {
-            return redirect('dashboard');
-        } else {
-            return abort('403');
-        }
+        return redirect('dashboard');
     }
 
     /**
@@ -100,11 +95,13 @@ class TaskController extends Controller
 
         $tasks = new Task();
 
-        $status = $tasks->where('id', $request->task_id)->update([
-            'task_name' => $validated->task_name,
-            'task_body' => $validated->task_body,
+        $tasks
+            ->where('user_id', Auth::user()->id)
+            ->where('id', $id)
+            ->update([
+            'task_name' => $validated['task_name'],
+            'task_body' => $validated['task_body'],
         ]);
-        //TODO: Добавить сюда обработчик статуса.
 
         return redirect('dashboard');
     }
@@ -118,8 +115,10 @@ class TaskController extends Controller
     public function destroy($id)
     {
         $tasks = new Task();
-        $status = $tasks->where('id', '=', $id)->delete();
-        // TODO: Сюда обработчик статуса
+        $status = $tasks
+            ->where('user_id', Auth::user()->id)
+            ->where('id', '=', $id)
+            ->delete();
 
         return redirect('dashboard');
     }

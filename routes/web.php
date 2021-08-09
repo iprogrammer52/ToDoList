@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $task = new Task();
-    $tasks = $task->where(['user_id' => Auth::user()->id])->orderBy('id','desc')->get();
+    $tasks = $task->where(['user_id' => Auth::user()->id])->orderBy('id','desc')->paginate(5);
 
     return view('dashboard', ['tasks' => $tasks]);
 

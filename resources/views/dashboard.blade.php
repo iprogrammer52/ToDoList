@@ -19,4 +19,7 @@
             <x-slot name="task_name">{{__('add_task.there_are_no_tasks')}}</x-slot>
         </x-task-card>
     @endif
+
+    {{ $tasks->onEachSide(5)->links() }}
+
 </x-app-layout>
